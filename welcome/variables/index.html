@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome Message Variables | Ghosty</title>
+    <meta name="description" content="Learn how to customize Ghosty's welcome messages using supported variables.">
+    <meta name="theme-color" content="#313338">
+
+    <link rel="icon" href="../../assets/ghosty.png">
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Welcome Variables | Ghosty">
+    <meta property="og:description" content="Documentation for customizing Ghosty's welcome messages.">
+    <meta property="og:url" content="https://docs.ghostybot.xyz/welcome/variables/">
+    <meta property="og:image" content="https://docs.ghostybot.xyz/assets/ghosty.png">
+</head>
+<body>
+    <div class="wrapper has-toc">
+        <header>
+            <a class="back-button" href="../../" aria-label="Back to homepage">← Back</a>
+
+            <h1>Welcome Message Variables</h1>
+            <a class="page-category" href="../">#welcome</a>
+        </header>
+
+        <div class="layout">
+            <aside class="toc" aria-label="Table of contents">
+                <p class="toc-title">On this page</p>
+                <nav>
+                    <ul class="toc-list"></ul>
+                </nav>
+            </aside>
+
+            <main>
+                <h2 id="how-to-use"><a class="anchor" href="#how-to-use"><span class="anchor-icon">#</span>How to use variables</a></h2>
+
+                <p>
+                    Variables allow you to personalize welcome messages
+                    with information about the member and the server.
+                </p>
+
+                <p>
+                    Configure your message using
+                    <span class="discord-command">/config welcome message</span> and include the
+                    variables you want to use.
+                </p>
+
+                <h2 id="available-variables"><a class="anchor" href="#available-variables"><span class="anchor-icon">#</span>Available Variables</a></h2>
+
+                <div class="variables-search">
+                    <input type="search" id="variable-search" placeholder="Search variables..." autocomplete="off" spellcheck="false">
+                </div>
+
+                <div class="variables-grid" id="variables-grid">
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{user}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>Mention of the new member.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{username}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The member's Discord username.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{displayName}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The member's display name.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{userId}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The member's Discord user ID.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{server}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The server's name.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{serverId}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The server's ID.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{memberCount}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The current number of server members.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{memberNumber}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The member's assigned join number, if supported.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{owner}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>Mention of the server owner.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{date}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The current date.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{time}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>The current time.</p>
+                    </article>
+
+                    <article class="variable-card">
+                        <div class="variable-card-head">
+                            <code>{timestamp}</code>
+                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                        </div>
+                        <p>A Discord timestamp for displaying a date and time.</p>
+                    </article>
+                </div>
+
+                <p class="variables-empty" id="variables-empty" hidden>No variables match your search.</p>
+
+                <div class="notice">
+                    <p><strong>Note</strong></p>
+                    <p>
+                        Variables must be written exactly as shown.
+                        Only variables implemented by Ghosty will
+                        be replaced with their corresponding values.
+                    </p>
+                </div>
+
+                <h2 id="preview"><a class="anchor" href="#preview"><span class="anchor-icon">#</span>Preview</a></h2>
+
+                <section class="preview-section">
+                    <div class="preview-controls">
+                        <div class="preview-controls-header">
+                            <label for="preview-input">
+                                Write your welcome message below:
+                            </label>
+
+                            <button type="button" class="reset-button" id="reset-button">Reset</button>
+                        </div>
+
+                        <div class="editor-wrap">
+                            <div class="editor-highlight" id="editor-highlight" aria-hidden="true"></div>
+
+                            <textarea id="preview-input" spellcheck="false" autocomplete="off">Welcome {user} to {server}!
+
+We now have {memberCount} members.
+
+We hope you enjoy your stay!</textarea>
+
+                            <ul class="var-autocomplete" id="var-autocomplete" role="listbox" aria-label="Available variables"></ul>
+                        </div>
+
+                        <div class="preview-footer">
+                            <p class="preview-hint">
+                                The preview updates automatically as you type.
+                                Type <code>{</code> to see the list of available variables.
+                            </p>
+
+                            <p class="char-counter" id="char-counter">0 / 2000</p>
+                        </div>
+                    </div>
+
+                    <div class="discord-message" aria-live="polite">
+                        <img class="discord-avatar" src="../../assets/ghosty.png" alt="Ghosty">
+                        <div class="discord-body">
+                            <div class="discord-header">
+                                <span class="discord-username">Ghosty</span>
+                                <span class="discord-bot-tag">Bot</span>
+                                <span class="discord-timestamp">Today at 12:00 PM</span>
+                            </div>
+                            <div class="discord-content" id="preview-output"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <a class="back-button mt" href="../../" aria-label="Back to homepage">← Back</a>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Ghosty.</p>
+        <p>
+            Ghosty is not affiliated with, endorsed by,
+            or sponsored by Discord Inc.
+        </p>
+    </footer>
+
+    <script>
+        (function () {
+            "use strict";
+
+            var VARIABLES = [
+                { name: "user",         desc: "Mention of the new member." },
+                { name: "username",     desc: "The member's Discord username." },
+                { name: "displayName",  desc: "The member's display name." },
+                { name: "userId",       desc: "The member's Discord user ID." },
+                { name: "server",       desc: "The server's name." },
+                { name: "serverId",     desc: "The server's ID." },
+                { name: "memberCount",  desc: "The current number of server members." },
+                { name: "memberNumber", desc: "The member's assigned join number." },
+                { name: "owner",        desc: "Mention of the server owner." },
+                { name: "date",         desc: "The current date." },
+                { name: "time",         desc: "The current time." },
+                { name: "timestamp",    desc: "A Discord timestamp." }
+            ];
+
+            var EXAMPLE_VALUES = {
+                user:         "@NewMember",
+                username:     "newmember",
+                displayName:  "New Member",
+                userId:       "123456789012345678",
+                server:       "My Awesome Server",
+                serverId:     "987654321098765432",
+                memberCount:  "1,247",
+                memberNumber: "1,247",
+                owner:        "@ServerOwner",
+                date:         "January 1, 2026",
+                time:         "12:00 PM",
+                timestamp:    "<t:1735689600:F>"
+            };
+
+            var MAX_LENGTH = 2000;
+            var WARN_LENGTH = 1800;
+            var DEFAULT_MESSAGE = "Welcome {user} to {server}!\n\nWe now have {memberCount} members.\n\nWe hope you enjoy your stay!";
+            var STORAGE_KEY = "ghosty:welcome-message";
+
+            var input = document.getElementById("preview-input");
+            var output = document.getElementById("preview-output");
+            var autocompleteEl = document.getElementById("var-autocomplete");
+            var highlightEl = document.getElementById("editor-highlight");
+            var resetButton = document.getElementById("reset-button");
+            var charCounter = document.getElementById("char-counter");
+            var searchInput = document.getElementById("variable-search");
+            var variablesGrid = document.getElementById("variables-grid");
+            var variablesEmpty = document.getElementById("variables-empty");
+            var variableCards = variablesGrid ? variablesGrid.querySelectorAll(".variable-card") : [];
+
+            function safeGetItem(key) {
+                try { return window.localStorage.getItem(key); } catch (e) { return null; }
+            }
+
+            function safeSetItem(key, value) {
+                try { window.localStorage.setItem(key, value); } catch (e) { }
+            }
+
+            function copyToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                return new Promise(function (resolve) {
+                    var ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.style.position = "fixed";
+                    ta.style.opacity = "0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand("copy"); } catch (e) { }
+                    document.body.removeChild(ta);
+                    resolve();
+                });
+            }
+
+            function escapeHtml(str) {
+                return str
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
+            function replaceVariables(text) {
+                return text.replace(/\{(\w+)\}/g, function (match, key) {
+                    if (Object.prototype.hasOwnProperty.call(EXAMPLE_VALUES, key)) {
+                        return EXAMPLE_VALUES[key];
+                    }
+                    return match;
+                });
+            }
+
+            function applyDiscordMarkdown(text) {
+                var safe = escapeHtml(text);
+                safe = safe.replace(/`([^`]+)`/g, "<code>$1</code>");
+                safe = safe.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+                safe = safe.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
+                safe = safe.replace(
+                    /(?<!<code>)@([A-Za-z0-9_]{2,32})/g,
+                    '<span class="discord-mention">@$1</span>'
+                );
+                return safe;
+            }
+
+            function autoGrow(el) {
+                el.style.height = "auto";
+                el.style.height = el.scrollHeight + "px";
+            }
+
+            function renderHighlight() {
+                var value = input.value;
+                var html = escapeHtml(value).replace(/\{(\w+)\}/g, function (match) {
+                    return '<span class="var-token">' + match + '</span>';
+                });
+                if (value.charAt(value.length - 1) === "\n") {
+                    html += " ";
+                }
+                highlightEl.innerHTML = html;
+            }
+
+            function renderPreview() {
+                var raw = input.value;
+                if (raw.trim() === "") {
+                    output.innerHTML = '<span style="color: var(--text-muted);">SoyAjneb is listening...</span>';
+                    return;
+                }
+                output.innerHTML = applyDiscordMarkdown(replaceVariables(raw));
+            }
+
+            function renderCounter() {
+                var len = input.value.length;
+                charCounter.textContent = len + " / " + MAX_LENGTH;
+                charCounter.classList.toggle("warn", len >= WARN_LENGTH && len <= MAX_LENGTH);
+                charCounter.classList.toggle("danger", len > MAX_LENGTH);
+            }
+
+            function updateEditor() {
+                autoGrow(input);
+                renderHighlight();
+                renderPreview();
+                renderCounter();
+            }
+
+            function saveMessage() {
+                safeSetItem(STORAGE_KEY, input.value);
+            }
+
+            function filterVariables() {
+                if (!searchInput || !variableCards.length) return;
+                var q = searchInput.value.trim().toLowerCase().replace(/[{}]/g, "");
+                var visible = 0;
+
+                for (var i = 0; i < variableCards.length; i++) {
+                    var card = variableCards[i];
+                    var codeEl = card.querySelector("code");
+                    var pEl = card.querySelector("p");
+                    var name = codeEl ? codeEl.textContent.replace(/[{}]/g, "").toLowerCase() : "";
+                    var desc = pEl ? pEl.textContent.toLowerCase() : "";
+                    var match = q === "" || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+                    card.hidden = !match;
+                    if (match) visible++;
+                }
+
+                if (variablesEmpty) {
+                    variablesEmpty.hidden = visible > 0;
+                }
+            }
+
+            var acOpen = false;
+            var acIndex = -1;
+            var acFiltered = [];
+            var acBracePos = -1;
+
+            function openAutocomplete(query, bracePos) {
+                acBracePos = bracePos;
+                acFiltered = VARIABLES.filter(function (v) {
+                    return v.name.toLowerCase().indexOf(query.toLowerCase()) === 0;
+                });
+
+                if (acFiltered.length === 0) {
+                    closeAutocomplete();
+                    return;
+                }
+
+                autocompleteEl.innerHTML = acFiltered.map(function (v, i) {
+                    return '<li class="var-autocomplete-item" role="option" data-index="' + i + '">' +
+                           '<code>{' + v.name + '}</code>' +
+                           '<span>' + v.desc + '</span>' +
+                           '</li>';
+                }).join("");
+
+                autocompleteEl.classList.add("open");
+                acOpen = true;
+                acIndex = 0;
+                highlightAutocomplete();
+            }
+
+            function closeAutocomplete() {
+                if (!acOpen) return;
+                autocompleteEl.classList.remove("open");
+                autocompleteEl.innerHTML = "";
+                acOpen = false;
+                acIndex = -1;
+                acFiltered = [];
+                acBracePos = -1;
+            }
+
+            function highlightAutocomplete() {
+                var items = autocompleteEl.children;
+                for (var i = 0; i < items.length; i++) {
+                    items[i].classList.toggle("active", i === acIndex);
+                }
+                if (items[acIndex] && items[acIndex].scrollIntoView) {
+                    items[acIndex].scrollIntoView({ block: "nearest" });
+                }
+            }
+
+            function insertVariable(name) {
+                var value = input.value;
+                var cursor = input.selectionStart;
+
+                var before = value.slice(0, acBracePos);
+                var after = value.slice(cursor);
+                var insertion = "{" + name + "}";
+
+                input.value = before + insertion + after;
+                var newCursor = before.length + insertion.length;
+
+                closeAutocomplete();
+                input.focus();
+                input.setSelectionRange(newCursor, newCursor);
+
+                updateEditor();
+                saveMessage();
+            }
+
+            function detectAutocompleteContext() {
+                var value = input.value;
+                var cursor = input.selectionStart;
+                var i = cursor - 1;
+                var bracePos = -1;
+
+                while (i >= 0) {
+                    var ch = value.charAt(i);
+                    if (ch === "{") { bracePos = i; break; }
+                    if (ch === "}" || ch === "\n") { bracePos = -1; break; }
+                    i--;
+                }
+
+                if (bracePos === -1) {
+                    closeAutocomplete();
+                    return;
+                }
+
+                var query = value.slice(bracePos + 1, cursor);
+                if (/[^A-Za-z0-9_]/.test(query)) {
+                    closeAutocomplete();
+                    return;
+                }
+
+                openAutocomplete(query, bracePos);
+            }
+
+            input.addEventListener("input", function () {
+                updateEditor();
+                detectAutocompleteContext();
+                saveMessage();
+            });
+
+            input.addEventListener("scroll", function () {
+                highlightEl.scrollTop = input.scrollTop;
+                highlightEl.scrollLeft = input.scrollLeft;
+            });
+
+            input.addEventListener("keydown", function (e) {
+                if (!acOpen) return;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    acIndex = (acIndex + 1) % acFiltered.length;
+                    highlightAutocomplete();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    acIndex = (acIndex - 1 + acFiltered.length) % acFiltered.length;
+                    highlightAutocomplete();
+                } else if (e.key === "Enter" || e.key === "Tab") {
+                    e.preventDefault();
+                    if (acFiltered[acIndex]) insertVariable(acFiltered[acIndex].name);
+                } else if (e.key === "Escape") {
+                    e.preventDefault();
+                    closeAutocomplete();
+                }
+            });
+
+            autocompleteEl.addEventListener("mousemove", function (e) {
+                if (!acOpen) return;
+                var item = e.target.closest(".var-autocomplete-item");
+                if (!item) return;
+                var idx = parseInt(item.getAttribute("data-index"), 10);
+                if (idx !== acIndex) {
+                    acIndex = idx;
+                    highlightAutocomplete();
+                }
+            });
+
+            autocompleteEl.addEventListener("mousedown", function (e) {
+                var item = e.target.closest(".var-autocomplete-item");
+                if (!item) return;
+                e.preventDefault();
+                var idx = parseInt(item.getAttribute("data-index"), 10);
+                if (acFiltered[idx]) insertVariable(acFiltered[idx].name);
+            });
+
+            document.addEventListener("mousedown", function (e) {
+                if (e.target === input) return;
+                if (autocompleteEl.contains(e.target)) return;
+                closeAutocomplete();
+            });
+
+            resetButton.addEventListener("click", function () {
+                input.value = DEFAULT_MESSAGE;
+                updateEditor();
+                saveMessage();
+                input.focus();
+                input.setSelectionRange(input.value.length, input.value.length);
+            });
+
+            var copyButtons = document.querySelectorAll(".copy-button");
+            for (var c = 0; c < copyButtons.length; c++) {
+                (function (btn) {
+                    var originalLabel = btn.textContent;
+                    var timeoutId = null;
+
+                    btn.addEventListener("click", function () {
+                        var card = btn.closest(".variable-card");
+                        if (!card) return;
+                        var code = card.querySelector("code");
+                        if (!code) return;
+                        var text = code.textContent;
+
+                        copyToClipboard(text).then(function () {
+                            btn.classList.add("copied");
+                            btn.textContent = "Copied";
+                            if (timeoutId) clearTimeout(timeoutId);
+                            timeoutId = setTimeout(function () {
+                                btn.classList.remove("copied");
+                                btn.textContent = originalLabel;
+                            }, 1200);
+                        });
+                    });
+                })(copyButtons[c]);
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener("input", filterVariables);
+                searchInput.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") {
+                        searchInput.value = "";
+                        filterVariables();
+                    }
+                });
+            }
+
+            var stored = safeGetItem(STORAGE_KEY);
+            if (stored !== null) {
+                input.value = stored;
+            }
+
+            updateEditor();
+        })();
+
+        (function () {
+            "use strict";
+            var list = document.querySelector(".toc-list");
+            if (!list) return;
+
+            var headings = document.querySelectorAll("main h2[id]");
+            if (!headings.length) return;
+
+            var html = "";
+            for (var i = 0; i < headings.length; i++) {
+                var h = headings[i];
+                var text = h.textContent.replace(/^#\s*/, "").trim();
+                html += '<li><a class="toc-link" href="#' + h.id + '">' + text + '</a></li>';
+            }
+            list.innerHTML = html;
+
+            var links = list.querySelectorAll(".toc-link");
+            var current = null;
+            var pinnedLink = null;
+
+            function setActive(link) {
+                if (link === current) return;
+                current = link;
+                for (var j = 0; j < links.length; j++) {
+                    links[j].classList.toggle("active", links[j] === link);
+                }
+            }
+
+            function updateActive() {
+                if (pinnedLink) return;
+
+                var offset = 60;
+                var scrollY = window.scrollY || window.pageYOffset;
+                var docHeight = document.documentElement.scrollHeight;
+                var winHeight = window.innerHeight;
+                var atBottom = scrollY + winHeight >= docHeight - 4;
+
+                if (atBottom) {
+                    setActive(links[links.length - 1]);
+                    return;
+                }
+
+                var activeIndex = 0;
+                for (var i = 0; i < headings.length; i++) {
+                    var top = headings[i].getBoundingClientRect().top;
+                    if (top - offset <= 0) {
+                        activeIndex = i;
+                    } else {
+                        break;
+                    }
+                }
+                setActive(links[activeIndex]);
+            }
+
+            var ticking = false;
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(function () {
+                    updateActive();
+                    ticking = false;
+                });
+            }
+
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener("click", function () {
+                    pinnedLink = this;
+                    setActive(this);
+                });
+            }
+
+            function unpin() {
+                if (!pinnedLink) return;
+                pinnedLink = null;
+                updateActive();
+            }
+
+            window.addEventListener("wheel", unpin, { passive: true });
+            window.addEventListener("touchstart", unpin, { passive: true });
+            window.addEventListener("keydown", function (e) {
+                var keys = ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "];
+                if (keys.indexOf(e.key) !== -1) unpin();
+            });
+
+            window.addEventListener("scroll", onScroll, { passive: true });
+            window.addEventListener("resize", onScroll);
+            updateActive();
+        })();
+    </script>
+</body>
+</html>
