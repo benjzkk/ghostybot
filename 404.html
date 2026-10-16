@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="page.title.notfound">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <base href="/">
 
     <title>404 | Ghosty</title>
     <meta name="description" content="Page not found.">
     <meta name="theme-color" content="#313338">
 
-    <link rel="icon" href="assets/ghosty.png">
-    <link rel="stylesheet" href="css/style.css">
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("ghosty:theme") === "light") {
+                    document.documentElement.setAttribute("data-theme", "light");
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <link rel="icon" href="/assets/ghosty.png">
+    <link rel="stylesheet" href="/css/style.css">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="404 | Ghosty">
@@ -20,93 +28,80 @@
     <meta property="og:image" content="https://docs.ghostybot.xyz/assets/ghosty.png">
 
     <style>
-        .not-found {
-            text-align: center;
-            padding: 2rem 1rem 1rem;
-        }
-
+        .not-found { text-align: center; padding: 2rem 1rem 1rem; }
         .not-found .code {
-            font-size: 5rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1;
+            font-size: 5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
             margin-bottom: 0.5rem;
             background: linear-gradient(90deg, var(--accent), #eb459e, #57f287);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-
-        .not-found .title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.75rem;
-        }
-
-        .not-found .desc {
-            color: var(--text-muted);
-            max-width: 460px;
-            margin: 0 auto 1.75rem;
-        }
-
-        .not-found .actions {
-            display: flex;
-            gap: 0.6rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .not-found .actions .back-button {
-            margin-bottom: 0;
-        }
-
+        .not-found .title { font-size: 1.35rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.75rem; }
+        .not-found .desc { color: var(--text-muted); max-width: 460px; margin: 0 auto 1.75rem; }
+        .not-found .actions { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+        .not-found .actions .back-button { margin-bottom: 0; }
         .not-found .actions .back-button.primary {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
+            background: var(--accent); color: #fff; border-color: var(--accent);
         }
-
         .not-found .actions .back-button.primary:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-            color: #fff;
+            background: var(--accent-hover); border-color: var(--accent-hover); color: #fff;
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <a class="back-button" href="./" aria-label="Back to homepage">← Back</a>
+            <div class="nav-buttons">
+                <a class="back-button" href="/" data-i18n="common.home">Home</a>
+            </div>
 
-            <h1>Page Not Found</h1>
-            <p class="meta">The page you're looking for doesn't exist.</p>
+            <h1 data-i18n="notfound.title">Page Not Found</h1>
+            <p class="meta" data-i18n="notfound.meta">The page you're looking for doesn't exist.</p>
+
+            <button type="button" class="lang-toggle" data-i18n-aria="common.lang_aria" aria-label="Change language">EN</button>
+            <button type="button" class="theme-toggle" id="theme-toggle" data-i18n-aria="common.theme_aria" aria-label="Toggle theme">
+                <span class="icon-sun">☀</span>
+                <span class="icon-moon">☾</span>
+            </button>
         </header>
 
         <main>
             <section class="not-found">
                 <p class="code">404</p>
-                <p class="title">This ghost has vanished</p>
-                <p class="desc">
-                    The page you tried to open may have been moved, renamed,
-                    or never existed in the first place.
-                </p>
+                <p class="title" data-i18n="notfound.code_title">This ghost has vanished</p>
+                <p class="desc" data-i18n="notfound.desc">The page you tried to open may have been moved, renamed, or never existed in the first place.</p>
 
                 <div class="actions">
-                    <a class="back-button primary" href="./">Go Home</a>
-                    <a class="back-button" href="privacy/">Privacy Policy</a>
-                    <a class="back-button" href="terms/">Terms of Service</a>
+                    <a class="back-button primary" href="/" data-i18n="notfound.go_home">Go Home</a>
+                    <a class="back-button" href="/privacy/" data-i18n="notfound.privacy">Privacy Policy</a>
+                    <a class="back-button" href="/terms/" data-i18n="notfound.terms">Terms of Service</a>
                 </div>
             </section>
         </main>
     </div>
 
     <footer>
-        <p>© 2026 Ghosty.</p>
-        <p>
-            Ghosty is not affiliated with, endorsed by,
-            or sponsored by Discord Inc.
-        </p>
+        <p data-i18n="common.footer_copy">© 2026 Ghosty.</p>
+        <p data-i18n="common.footer_disclaimer">Ghosty is not affiliated with, endorsed by, or sponsored by Discord Inc.</p>
     </footer>
+
+    <script src="/js/i18n.js"></script>
+    <script>
+        (function () {
+            "use strict";
+            var btn = document.getElementById("theme-toggle");
+            if (!btn) return;
+            function apply(isLight) {
+                if (isLight) document.documentElement.setAttribute("data-theme", "light");
+                else document.documentElement.removeAttribute("data-theme");
+                try { localStorage.setItem("ghosty:theme", isLight ? "light" : "dark"); } catch (e) {}
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute("content", isLight ? "#ffffff" : "#313338");
+            }
+            btn.addEventListener("click", function () {
+                var isLight = document.documentElement.getAttribute("data-theme") === "light";
+                apply(!isLight);
+            });
+        })();
+    </script>
 </body>
 </html>

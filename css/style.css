@@ -7,8 +7,12 @@
   --text-normal: #dbdee1;
   --text-muted: #b5bac1;
   --text-link: #00a8fc;
+  --text-heading: #ffffff;
   --accent: #5865f2;
   --accent-hover: #4752c4;
+  --accent-soft-bg: rgba(88, 101, 242, 0.2);
+  --accent-soft-border: rgba(88, 101, 242, 0.45);
+  --accent-soft-text: #c9cdfb;
   --border: #3f4147;
   --radius: 8px;
   --radius-lg: 12px;
@@ -17,6 +21,34 @@
   --danger: #ed4245;
   --warning: #faa61a;
   --success: #57f287;
+  --token-bg: #313338;
+  --discord-msg-bg: #313338;
+  --discord-msg-text: #dbdee1;
+}
+
+html[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f2f3f5;
+  --bg-tertiary: #e3e5e8;
+  --bg-modifier: #ebedef;
+  --bg-hover: #dfe1e5;
+  --text-normal: #2e3338;
+  --text-muted: #5c5e66;
+  --text-link: #006ce7;
+  --text-heading: #060607;
+  --accent: #5865f2;
+  --accent-hover: #4752c4;
+  --accent-soft-bg: rgba(88, 101, 242, 0.12);
+  --accent-soft-border: rgba(88, 101, 242, 0.35);
+  --accent-soft-text: #4752c4;
+  --border: #d4d7dc;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --danger: #d83c3e;
+  --warning: #c47d0a;
+  --success: #1a9c4a;
+  --token-bg: #c9ccd1;
+  --discord-msg-bg: #ffffff;
+  --discord-msg-text: #2e3338;
 }
 
 *,
@@ -59,7 +91,8 @@ body::before {
   flex: 1;
 }
 
-.wrapper.has-toc {
+.wrapper.has-toc,
+.wrapper.has-sidebar {
   max-width: 1120px;
 }
 
@@ -70,27 +103,50 @@ body::before {
   align-items: start;
 }
 
-.toc {
+.layout-sidebar {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.toc,
+.discord-panel {
   position: sticky;
   top: 2rem;
   align-self: start;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 1rem 0.85rem;
   box-shadow: var(--shadow);
+}
+
+.toc {
+  padding: 1rem 0.85rem;
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
 }
 
-.toc-title {
+.discord-panel {
+  padding: 1rem;
+}
+
+.toc-title,
+.discord-panel-title {
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-bottom: 0.6rem;
+}
+
+.toc-title {
   padding: 0 0.4rem;
+}
+
+.discord-panel-title {
+  padding: 0 0.25rem;
 }
 
 .toc-list {
@@ -120,17 +176,32 @@ body::before {
 
 .toc-link:hover {
   background: var(--bg-modifier);
-  color: #fff;
+  color: var(--text-heading);
   text-decoration: none;
 }
 
 .toc-link.active {
   background: var(--bg-modifier);
-  color: #fff;
+  color: var(--text-heading);
   border-left-color: var(--accent);
 }
 
+.discord-widget {
+  display: flex;
+  justify-content: center;
+}
+
+.discord-widget iframe {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-modifier);
+  display: block;
+}
+
 header {
+  position: relative;
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   padding: 1.75rem 1.5rem;
@@ -142,7 +213,7 @@ header {
 header h1 {
   font-size: 1.85rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-heading);
   letter-spacing: -0.02em;
   margin-bottom: 0.35rem;
 }
@@ -177,6 +248,68 @@ header .lang a:hover {
   text-decoration: underline;
 }
 
+.theme-toggle,
+.lang-toggle {
+  position: absolute;
+  top: 1.25rem;
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-modifier);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+
+.theme-toggle {
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-toggle {
+  right: 4.5rem;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.theme-toggle:hover,
+.lang-toggle:hover {
+  background: var(--bg-hover);
+  color: var(--text-heading);
+  border-color: var(--accent);
+}
+
+.theme-toggle:active,
+.lang-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+html:not([data-theme="light"]) .theme-toggle .icon-sun {
+  display: inline;
+}
+
+html[data-theme="light"] .theme-toggle .icon-moon {
+  display: inline;
+}
+
 main {
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
@@ -188,7 +321,7 @@ main {
 main h2 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-heading);
   margin: 1.75rem 0 0.75rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--border);
@@ -250,7 +383,7 @@ main a {
 
 main a:hover {
   text-decoration: underline;
-  color: #00b0f4;
+  color: var(--accent-hover);
 }
 
 .links-list {
@@ -282,7 +415,7 @@ main a:hover {
   background: var(--bg-hover);
   border-color: var(--accent);
   text-decoration: none;
-  color: #fff;
+  color: var(--text-heading);
 }
 
 .links-list a::before {
@@ -330,7 +463,7 @@ main a:hover {
 .feature-card h3 {
   font-size: 0.95rem;
   margin-bottom: 0.25rem;
-  color: #fff;
+  color: var(--text-heading);
 }
 
 .feature-card p {
@@ -395,23 +528,35 @@ footer a:hover {
   font-size: 0.78rem;
   font-weight: 600;
   font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
-  color: #c9cdfb;
-  background: rgba(88, 101, 242, 0.2);
-  border: 1px solid rgba(88, 101, 242, 0.45);
+  color: var(--accent-soft-text);
+  background: var(--accent-soft-bg);
+  border: 1px solid var(--accent-soft-border);
   border-radius: 999px;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .page-category:hover {
-  background: rgba(88, 101, 242, 0.35);
-  color: #fff;
+  background: var(--accent-soft-bg);
+  color: var(--text-heading);
   border-color: var(--accent);
   text-decoration: none;
 }
 
 .page-category:active {
   transform: translateY(1px);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.nav-buttons.mt {
+  margin-top: 1.25rem;
+  margin-bottom: 0;
 }
 
 .back-button {
@@ -424,13 +569,12 @@ footer a:hover {
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  margin-bottom: 0.75rem;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .back-button:hover {
   background: var(--bg-hover);
-  color: #fff;
+  color: var(--text-heading);
   border-color: var(--accent);
   text-decoration: none;
 }
@@ -504,7 +648,7 @@ footer a:hover {
 .variable-card code {
   display: inline-block;
   background: var(--bg-tertiary);
-  color: #fff;
+  color: var(--text-heading);
   padding: 0.2rem 0.45rem;
   border-radius: 5px;
   font-size: 0.9rem;
@@ -514,6 +658,18 @@ footer a:hover {
   color: var(--text-muted);
   font-size: 0.875rem;
   margin-bottom: 0;
+}
+
+.variable-card p.variable-example {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+  margin-top: 0.45rem;
+  font-style: italic;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 
 .copy-button {
@@ -535,7 +691,7 @@ footer a:hover {
 
 .copy-button:hover {
   background: var(--bg-hover);
-  color: #fff;
+  color: var(--text-heading);
   border-color: var(--accent);
 }
 
@@ -546,7 +702,7 @@ footer a:hover {
 .copy-button.copied {
   color: var(--success);
   border-color: var(--success);
-  background: rgba(87, 242, 135, 0.08);
+  background: transparent;
 }
 
 .variables-empty {
@@ -619,7 +775,7 @@ footer a:hover {
 .preview-controls label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-heading);
 }
 
 .reset-button {
@@ -638,7 +794,7 @@ footer a:hover {
 
 .reset-button:hover {
   background: var(--bg-hover);
-  color: #fff;
+  color: var(--text-heading);
   border-color: var(--accent);
 }
 
@@ -695,10 +851,10 @@ footer a:hover {
 }
 
 .editor-highlight .var-token {
-  background: var(--bg-primary);
-  color: #fff;
+  background: var(--token-bg);
+  color: var(--text-heading);
   border-radius: 3px;
-  box-shadow: 0 0 0 2px var(--bg-primary);
+  box-shadow: 0 0 0 2px var(--token-bg);
 }
 
 .editor-wrap:focus-within .editor-highlight {
@@ -739,8 +895,8 @@ footer a:hover {
 }
 
 .discord-command {
-  background: rgba(88, 101, 242, 0.3);
-  color: #c9cdfb;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
   font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
@@ -749,7 +905,7 @@ footer a:hover {
 }
 
 .discord-message {
-  background: #313338;
+  background: var(--discord-msg-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1rem;
@@ -786,7 +942,7 @@ footer a:hover {
 
 .discord-username {
   font-weight: 600;
-  color: #fff;
+  color: var(--text-heading);
   font-size: 0.95rem;
 }
 
@@ -807,7 +963,7 @@ footer a:hover {
 }
 
 .discord-content {
-  color: var(--text-normal);
+  color: var(--discord-msg-text);
   font-size: 0.95rem;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -817,7 +973,7 @@ footer a:hover {
 
 .discord-content strong {
   font-weight: 700;
-  color: #fff;
+  color: var(--text-heading);
 }
 
 .discord-content em {
@@ -826,6 +982,7 @@ footer a:hover {
 
 .discord-content code {
   background: var(--bg-tertiary);
+  color: var(--text-heading);
   padding: 0.15rem 0.35rem;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -833,8 +990,8 @@ footer a:hover {
 }
 
 .discord-mention {
-  background: rgba(88, 101, 242, 0.3);
-  color: #c9cdfb;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
   padding: 0.05rem 0.25rem;
   border-radius: 3px;
   font-weight: 500;
@@ -871,7 +1028,7 @@ footer a:hover {
 .var-autocomplete-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin: 0 0 0.25rem 0;
   padding: 0.7rem 0.85rem;
   border-radius: 6px;
@@ -896,7 +1053,7 @@ footer a:hover {
 
 .var-autocomplete-item code {
   background: var(--bg-tertiary);
-  color: #fff;
+  color: var(--text-heading);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.82rem;
@@ -912,6 +1069,8 @@ footer a:hover {
 }
 
 .var-autocomplete-item span {
+  flex: 1;
+  min-width: 0;
   color: var(--text-muted);
   font-size: 0.82rem;
   white-space: nowrap;
@@ -924,6 +1083,46 @@ footer a:hover {
   color: #fff;
 }
 
+.var-autocomplete-item .ac-copy {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: transparent;
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.var-autocomplete-item .ac-copy:hover {
+  background: var(--bg-hover);
+  color: var(--text-heading);
+  border-color: var(--accent);
+}
+
+.var-autocomplete-item.active .ac-copy {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.var-autocomplete-item.active .ac-copy:hover {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.var-autocomplete-item .ac-copy.copied {
+  color: var(--success);
+  border-color: var(--success);
+  background: transparent;
+}
+
 .var-autocomplete-empty {
   margin: 0;
   padding: 0.75rem;
@@ -933,13 +1132,23 @@ footer a:hover {
 }
 
 @media (max-width: 900px) {
-  .layout {
+  .layout,
+  .layout-sidebar {
     grid-template-columns: 1fr;
     gap: 0;
   }
 
   .toc {
     display: none;
+  }
+
+  .discord-panel {
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+
+  .discord-widget iframe {
+    height: 380px;
   }
 }
 
@@ -955,6 +1164,23 @@ footer a:hover {
 
   header h1 {
     font-size: 1.5rem;
+  }
+
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .lang-toggle {
+    top: 1rem;
+    right: 3.5rem;
+    height: 32px;
+    min-width: 32px;
+    padding: 0 0.4rem;
+    font-size: 0.68rem;
   }
 
   main h2 {
@@ -978,7 +1204,7 @@ footer a:hover {
 
   .var-autocomplete-item {
     padding: 0.6rem 0.7rem;
-    gap: 0.55rem;
+    gap: 0.45rem;
   }
 
   .var-autocomplete-item span {

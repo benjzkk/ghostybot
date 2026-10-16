@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="page.title.welcome">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Welcome | Ghosty</title>
+    <title>Welcome System | Ghosty</title>
     <meta name="description" content="Documentation for Ghosty's welcome system.">
     <meta name="theme-color" content="#313338">
+
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("ghosty:theme") === "light") {
+                    document.documentElement.setAttribute("data-theme", "light");
+                }
+            } catch (e) {}
+        })();
+    </script>
 
     <link rel="icon" href="../assets/ghosty.png">
     <link rel="stylesheet" href="../css/style.css">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Welcome | Ghosty">
+    <meta property="og:title" content="Welcome System | Ghosty">
     <meta property="og:description" content="Documentation for Ghosty's welcome system.">
     <meta property="og:url" content="https://docs.ghostybot.xyz/welcome/">
     <meta property="og:image" content="https://docs.ghostybot.xyz/assets/ghosty.png">
@@ -20,47 +30,66 @@
 <body>
     <div class="wrapper">
         <header>
-            <a class="back-button" href="../" aria-label="Back to homepage">← Back</a>
+            <div class="nav-buttons">
+                <a class="back-button" href="../" data-i18n="common.home">Home</a>
+            </div>
 
-            <h1>Welcome</h1>
+            <h1 data-i18n="welcome.title">Welcome System</h1>
             <a class="page-category" href="./">#welcome</a>
+
+            <button type="button" class="lang-toggle" data-i18n-aria="common.lang_aria" aria-label="Change language">EN</button>
+            <button type="button" class="theme-toggle" id="theme-toggle" data-i18n-aria="common.theme_aria" aria-label="Toggle theme">
+                <span class="icon-sun">☀</span>
+                <span class="icon-moon">☾</span>
+            </button>
         </header>
 
         <main>
-            <p>
-                Ghosty can greet new members with fully customizable welcome
-                messages. This section covers everything you need to configure
-                and personalize the welcome system.
-            </p>
+            <p data-i18n="welcome.intro">Ghosty can greet new members with fully customizable welcome messages. This section covers everything you need to configure and personalize the welcome system.</p>
 
-            <h2 id="pages"><a class="anchor" href="#pages"><span class="anchor-icon">#</span>Pages</a></h2>
+            <h2 id="pages"><a class="anchor" href="#pages"><span class="anchor-icon">#</span><span data-i18n="welcome.pages">Pages</span></a></h2>
 
             <ul class="links-list">
                 <li>
-                    <a href="variables/">
-                        Welcome Message Variables
-                    </a>
+                    <a href="variables/" data-i18n="welcome.variables_link">Welcome Message Variables</a>
                 </li>
             </ul>
 
-            <h2 id="commands"><a class="anchor" href="#commands"><span class="anchor-icon">#</span>Commands</a></h2>
+            <h2 id="commands"><a class="anchor" href="#commands"><span class="anchor-icon">#</span><span data-i18n="welcome.commands">Commands</span></a></h2>
 
             <ul>
-                <li><span class="discord-command">/config welcome view</span> — Shows the current configuration of the welcome system.</li>
-                <li><span class="discord-command">/config welcome message</span> — Sets the welcome message that new members will receive.</li>
-                <li><span class="discord-command">/config welcome channel</span> — Sets the channel where welcome messages will be sent.</li>
-                <li><span class="discord-command">/config welcome enable</span> — Enables the welcome system for new members.</li>
-                <li><span class="discord-command">/config welcome disable</span> — Disables the welcome system for new members.</li>
+                <li><span class="discord-command">/config welcome view</span> — <span data-i18n="welcome.cmd_view">Shows the current configuration of the welcome system.</span></li>
+                <li><span class="discord-command">/config welcome message</span> — <span data-i18n="welcome.cmd_message">Sets the welcome message that new members will receive.</span></li>
+                <li><span class="discord-command">/config welcome channel</span> — <span data-i18n="welcome.cmd_channel">Sets the channel where welcome messages will be sent.</span></li>
+                <li><span class="discord-command">/config welcome enable</span> — <span data-i18n="welcome.cmd_enable">Enables the welcome system for new members.</span></li>
+                <li><span class="discord-command">/config welcome disable</span> — <span data-i18n="welcome.cmd_disable">Disables the welcome system for new members.</span></li>
             </ul>
         </main>
     </div>
 
     <footer>
-        <p>© 2026 Ghosty.</p>
-        <p>
-            Ghosty is not affiliated with, endorsed by,
-            or sponsored by Discord Inc.
-        </p>
+        <p data-i18n="common.footer_copy">© 2026 Ghosty.</p>
+        <p data-i18n="common.footer_disclaimer">Ghosty is not affiliated with, endorsed by, or sponsored by Discord Inc.</p>
     </footer>
+
+    <script src="../js/i18n.js"></script>
+    <script>
+        (function () {
+            "use strict";
+            var btn = document.getElementById("theme-toggle");
+            if (!btn) return;
+            function apply(isLight) {
+                if (isLight) document.documentElement.setAttribute("data-theme", "light");
+                else document.documentElement.removeAttribute("data-theme");
+                try { localStorage.setItem("ghosty:theme", isLight ? "light" : "dark"); } catch (e) {}
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute("content", isLight ? "#ffffff" : "#313338");
+            }
+            btn.addEventListener("click", function () {
+                var isLight = document.documentElement.getAttribute("data-theme") === "light";
+                apply(!isLight);
+            });
+        })();
+    </script>
 </body>
 </html>

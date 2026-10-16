@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-title="page.title.variables">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Welcome Message Variables | Ghosty</title>
+    <title>Message Variables | Ghosty</title>
     <meta name="description" content="Learn how to customize Ghosty's welcome messages using supported variables.">
     <meta name="theme-color" content="#313338">
+
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem("ghosty:theme") === "light") {
+                    document.documentElement.setAttribute("data-theme", "light");
+                }
+            } catch (e) {}
+        })();
+    </script>
 
     <link rel="icon" href="../../assets/ghosty.png">
     <link rel="stylesheet" href="../../css/style.css">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Welcome Variables | Ghosty">
+    <meta property="og:title" content="Message Variables | Ghosty">
     <meta property="og:description" content="Documentation for customizing Ghosty's welcome messages.">
     <meta property="og:url" content="https://docs.ghostybot.xyz/welcome/variables/">
     <meta property="og:image" content="https://docs.ghostybot.xyz/assets/ghosty.png">
@@ -20,159 +30,169 @@
 <body>
     <div class="wrapper has-toc">
         <header>
-            <a class="back-button" href="../../" aria-label="Back to homepage">← Back</a>
+            <div class="nav-buttons">
+                <a class="back-button" href="../" data-i18n="common.back">← Back</a>
+                <a class="back-button" href="../../" data-i18n="common.home">Home</a>
+            </div>
 
-            <h1>Welcome Message Variables</h1>
+            <h1 data-i18n="variables.title">Message Variables</h1>
             <a class="page-category" href="../">#welcome</a>
+
+            <button type="button" class="lang-toggle" data-i18n-aria="common.lang_aria" aria-label="Change language">EN</button>
+            <button type="button" class="theme-toggle" id="theme-toggle" data-i18n-aria="common.theme_aria" aria-label="Toggle theme">
+                <span class="icon-sun">☀</span>
+                <span class="icon-moon">☾</span>
+            </button>
         </header>
 
         <div class="layout">
             <aside class="toc" aria-label="Table of contents">
-                <p class="toc-title">On this page</p>
+                <p class="toc-title" data-i18n="common.toc_title">On this page</p>
                 <nav>
                     <ul class="toc-list"></ul>
                 </nav>
             </aside>
 
             <main>
-                <h2 id="how-to-use"><a class="anchor" href="#how-to-use"><span class="anchor-icon">#</span>How to use variables</a></h2>
+                <h2 id="how-to-use"><a class="anchor" href="#how-to-use"><span class="anchor-icon">#</span><span data-i18n="variables.h2.how">How to use variables</span></a></h2>
 
-                <p>
-                    Variables allow you to personalize welcome messages
-                    with information about the member and the server.
-                </p>
+                <p data-i18n="variables.p.how.1">Variables allow you to personalize welcome messages with information about the member and the server.</p>
 
-                <p>
-                    Configure your message using
-                    <span class="discord-command">/config welcome message</span> and include the
-                    variables you want to use.
-                </p>
+                <p data-i18n-html="variables.p.how.2_html">Configure your message using <span class="discord-command">/config welcome message</span> and include the variables you want to use.</p>
 
-                <h2 id="available-variables"><a class="anchor" href="#available-variables"><span class="anchor-icon">#</span>Available Variables</a></h2>
+                <h2 id="available-variables"><a class="anchor" href="#available-variables"><span class="anchor-icon">#</span><span data-i18n="variables.h2.available">Available Variables</span></a></h2>
 
                 <div class="variables-search">
-                    <input type="search" id="variable-search" placeholder="Search variables..." autocomplete="off" spellcheck="false">
+                    <input type="search" id="variable-search" data-i18n-placeholder="common.search_placeholder" placeholder="Search variables..." autocomplete="off" spellcheck="false">
                 </div>
 
                 <div class="variables-grid" id="variables-grid">
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{user}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>Mention of the new member.</p>
+                        <p data-i18n="variables.var.user">Mention of the new member.</p>
+                        <p class="variable-example" data-i18n="variables.ex.user">e.g. Welcome @NewMember to the server!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{username}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The member's Discord username.</p>
+                        <p data-i18n="variables.var.username">The member's Discord username.</p>
+                        <p class="variable-example" data-i18n="variables.ex.username">e.g. Welcome newmember!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{displayName}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The member's display name.</p>
+                        <p data-i18n="variables.var.displayName">The member's display name.</p>
+                        <p class="variable-example" data-i18n="variables.ex.displayName">e.g. Welcome New Member!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{userId}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The member's Discord user ID.</p>
+                        <p data-i18n="variables.var.userId">The member's Discord user ID.</p>
+                        <p class="variable-example" data-i18n="variables.ex.userId">e.g. User ID: 123456789012345678</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{server}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The server's name.</p>
+                        <p data-i18n="variables.var.server">The server's name.</p>
+                        <p class="variable-example" data-i18n="variables.ex.server">e.g. Welcome to My Awesome Server!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{serverId}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The server's ID.</p>
+                        <p data-i18n="variables.var.serverId">The server's ID.</p>
+                        <p class="variable-example" data-i18n="variables.ex.serverId">e.g. Server ID: 987654321098765432</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{memberCount}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The current number of server members.</p>
+                        <p data-i18n="variables.var.memberCount">The current number of server members.</p>
+                        <p class="variable-example" data-i18n="variables.ex.memberCount">e.g. We now have 1,247 members!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{memberNumber}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The member's assigned join number, if supported.</p>
+                        <p data-i18n="variables.var.memberNumber">The member's assigned join number, if supported.</p>
+                        <p class="variable-example" data-i18n="variables.ex.memberNumber">e.g. You are member #1,247!</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{owner}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>Mention of the server owner.</p>
+                        <p data-i18n="variables.var.owner">Mention of the server owner.</p>
+                        <p class="variable-example" data-i18n="variables.ex.owner">e.g. Contact @ServerOwner for help.</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{date}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The current date.</p>
+                        <p data-i18n="variables.var.date">The current date.</p>
+                        <p class="variable-example" data-i18n="variables.ex.date">e.g. Joined on January 1, 2026</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{time}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>The current time.</p>
+                        <p data-i18n="variables.var.time">The current time.</p>
+                        <p class="variable-example" data-i18n="variables.ex.time">e.g. Joined at 12:00 PM</p>
                     </article>
 
                     <article class="variable-card">
                         <div class="variable-card-head">
                             <code>{timestamp}</code>
-                            <button type="button" class="copy-button" aria-label="Copy variable">Copy</button>
+                            <button type="button" class="copy-button" data-i18n="common.copy_btn" aria-label="Copy variable">Copy</button>
                         </div>
-                        <p>A Discord timestamp for displaying a date and time.</p>
+                        <p data-i18n="variables.var.timestamp">A Discord timestamp for displaying a date and time.</p>
+                        <p class="variable-example" data-i18n="variables.ex.timestamp">e.g. Joined &lt;t:1735689600:F&gt;</p>
                     </article>
                 </div>
 
-                <p class="variables-empty" id="variables-empty" hidden>No variables match your search.</p>
+                <p class="variables-empty" id="variables-empty" data-i18n="variables.empty" hidden>No variables match your search.</p>
 
                 <div class="notice">
-                    <p><strong>Note</strong></p>
-                    <p>
-                        Variables must be written exactly as shown.
-                        Only variables implemented by Ghosty will
-                        be replaced with their corresponding values.
-                    </p>
+                    <p><strong data-i18n="variables.notice.title">Note</strong></p>
+                    <p data-i18n="variables.notice.text">Variables must be written exactly as shown. Only variables implemented by Ghosty will be replaced with their corresponding values.</p>
                 </div>
 
-                <h2 id="preview"><a class="anchor" href="#preview"><span class="anchor-icon">#</span>Preview</a></h2>
+                <h2 id="preview"><a class="anchor" href="#preview"><span class="anchor-icon">#</span><span data-i18n="variables.h2.preview">Preview</span></a></h2>
 
                 <section class="preview-section">
                     <div class="preview-controls">
                         <div class="preview-controls-header">
-                            <label for="preview-input">
+                            <label for="preview-input" data-i18n="variables.label.preview">
                                 Write your welcome message below:
                             </label>
 
-                            <button type="button" class="reset-button" id="reset-button">Reset</button>
+                            <button type="button" class="reset-button" id="reset-button" data-i18n="common.reset_btn">Reset</button>
                         </div>
 
                         <div class="editor-wrap">
@@ -188,7 +208,7 @@ We hope you enjoy your stay!</textarea>
                         </div>
 
                         <div class="preview-footer">
-                            <p class="preview-hint">
+                            <p class="preview-hint" data-i18n-html="variables.hint_html">
                                 The preview updates automatically as you type.
                                 Type <code>{</code> to see the list of available variables.
                             </p>
@@ -203,43 +223,44 @@ We hope you enjoy your stay!</textarea>
                             <div class="discord-header">
                                 <span class="discord-username">Ghosty</span>
                                 <span class="discord-bot-tag">Bot</span>
-                                <span class="discord-timestamp">Today at 12:00 PM</span>
+                                <span class="discord-timestamp" data-i18n="variables.discord_timestamp">Today at 12:00 PM</span>
                             </div>
                             <div class="discord-content" id="preview-output"></div>
                         </div>
                     </div>
                 </section>
 
-                <a class="back-button mt" href="../../" aria-label="Back to homepage">← Back</a>
+                <div class="nav-buttons mt">
+                    <a class="back-button" href="../" data-i18n="common.back">← Back</a>
+                    <a class="back-button" href="../../" data-i18n="common.home">Home</a>
+                </div>
             </main>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 Ghosty.</p>
-        <p>
-            Ghosty is not affiliated with, endorsed by,
-            or sponsored by Discord Inc.
-        </p>
+        <p data-i18n="common.footer_copy">© 2026 Ghosty.</p>
+        <p data-i18n="common.footer_disclaimer">Ghosty is not affiliated with, endorsed by, or sponsored by Discord Inc.</p>
     </footer>
 
+    <script src="../../js/i18n.js"></script>
     <script>
         (function () {
             "use strict";
 
             var VARIABLES = [
-                { name: "user",         desc: "Mention of the new member." },
-                { name: "username",     desc: "The member's Discord username." },
-                { name: "displayName",  desc: "The member's display name." },
-                { name: "userId",       desc: "The member's Discord user ID." },
-                { name: "server",       desc: "The server's name." },
-                { name: "serverId",     desc: "The server's ID." },
-                { name: "memberCount",  desc: "The current number of server members." },
-                { name: "memberNumber", desc: "The member's assigned join number." },
-                { name: "owner",        desc: "Mention of the server owner." },
-                { name: "date",         desc: "The current date." },
-                { name: "time",         desc: "The current time." },
-                { name: "timestamp",    desc: "A Discord timestamp." }
+                { name: "user",         descKey: "variables.var.user" },
+                { name: "username",     descKey: "variables.var.username" },
+                { name: "displayName",  descKey: "variables.var.displayName" },
+                { name: "userId",       descKey: "variables.var.userId" },
+                { name: "server",       descKey: "variables.var.server" },
+                { name: "serverId",     descKey: "variables.var.serverId" },
+                { name: "memberCount",  descKey: "variables.var.memberCount" },
+                { name: "memberNumber", descKey: "variables.var.memberNumber" },
+                { name: "owner",        descKey: "variables.var.owner" },
+                { name: "date",         descKey: "variables.var.date" },
+                { name: "time",         descKey: "variables.var.time" },
+                { name: "timestamp",    descKey: "variables.var.timestamp" }
             ];
 
             var EXAMPLE_VALUES = {
@@ -347,7 +368,8 @@ We hope you enjoy your stay!</textarea>
             function renderPreview() {
                 var raw = input.value;
                 if (raw.trim() === "") {
-                    output.innerHTML = '<span style="color: var(--text-muted);">SoyAjneb is listening...</span>';
+                    var placeholder = window.GhostyI18n ? window.GhostyI18n.t("variables.typing_placeholder") : "SoyAjneb is listening...";
+                    output.innerHTML = '<span style="color: var(--text-muted);">' + placeholder + '</span>';
                     return;
                 }
                 output.innerHTML = applyDiscordMarkdown(replaceVariables(raw));
@@ -379,10 +401,12 @@ We hope you enjoy your stay!</textarea>
                 for (var i = 0; i < variableCards.length; i++) {
                     var card = variableCards[i];
                     var codeEl = card.querySelector("code");
-                    var pEl = card.querySelector("p");
+                    var pEl = card.querySelector("p:not(.variable-example)");
+                    var exEl = card.querySelector(".variable-example");
                     var name = codeEl ? codeEl.textContent.replace(/[{}]/g, "").toLowerCase() : "";
                     var desc = pEl ? pEl.textContent.toLowerCase() : "";
-                    var match = q === "" || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+                    var ex = exEl ? exEl.textContent.toLowerCase() : "";
+                    var match = q === "" || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1 || ex.indexOf(q) !== -1;
                     card.hidden = !match;
                     if (match) visible++;
                 }
@@ -408,10 +432,14 @@ We hope you enjoy your stay!</textarea>
                     return;
                 }
 
+                var copyLabel = window.GhostyI18n ? window.GhostyI18n.t("common.copy_btn") : "Copy";
+
                 autocompleteEl.innerHTML = acFiltered.map(function (v, i) {
+                    var desc = window.GhostyI18n ? window.GhostyI18n.t(v.descKey) : "";
                     return '<li class="var-autocomplete-item" role="option" data-index="' + i + '">' +
                            '<code>{' + v.name + '}</code>' +
-                           '<span>' + v.desc + '</span>' +
+                           '<span>' + desc + '</span>' +
+                           '<button type="button" class="ac-copy" data-index="' + i + '" aria-label="Copy variable">' + copyLabel + '</button>' +
                            '</li>';
                 }).join("");
 
@@ -530,6 +558,25 @@ We hope you enjoy your stay!</textarea>
             });
 
             autocompleteEl.addEventListener("mousedown", function (e) {
+                var copyBtn = e.target.closest(".ac-copy");
+                if (copyBtn) {
+                    e.preventDefault();
+                    var idxCopy = parseInt(copyBtn.getAttribute("data-index"), 10);
+                    if (isNaN(idxCopy) || !acFiltered[idxCopy]) return;
+                    var variableText = "{" + acFiltered[idxCopy].name + "}";
+                    copyToClipboard(variableText).then(function () {
+                        var copiedLabel = window.GhostyI18n ? window.GhostyI18n.t("common.copied_btn") : "Copied";
+                        var copyLabel = window.GhostyI18n ? window.GhostyI18n.t("common.copy_btn") : "Copy";
+                        copyBtn.classList.add("copied");
+                        copyBtn.textContent = copiedLabel;
+                        setTimeout(function () {
+                            copyBtn.classList.remove("copied");
+                            copyBtn.textContent = copyLabel;
+                        }, 1200);
+                    });
+                    return;
+                }
+
                 var item = e.target.closest(".var-autocomplete-item");
                 if (!item) return;
                 e.preventDefault();
@@ -554,7 +601,6 @@ We hope you enjoy your stay!</textarea>
             var copyButtons = document.querySelectorAll(".copy-button");
             for (var c = 0; c < copyButtons.length; c++) {
                 (function (btn) {
-                    var originalLabel = btn.textContent;
                     var timeoutId = null;
 
                     btn.addEventListener("click", function () {
@@ -565,12 +611,14 @@ We hope you enjoy your stay!</textarea>
                         var text = code.textContent;
 
                         copyToClipboard(text).then(function () {
+                            var copiedLabel = window.GhostyI18n ? window.GhostyI18n.t("common.copied_btn") : "Copied";
+                            var copyLabel = window.GhostyI18n ? window.GhostyI18n.t("common.copy_btn") : "Copy";
                             btn.classList.add("copied");
-                            btn.textContent = "Copied";
+                            btn.textContent = copiedLabel;
                             if (timeoutId) clearTimeout(timeoutId);
                             timeoutId = setTimeout(function () {
                                 btn.classList.remove("copied");
-                                btn.textContent = originalLabel;
+                                btn.textContent = copyLabel;
                             }, 1200);
                         });
                     });
@@ -593,6 +641,11 @@ We hope you enjoy your stay!</textarea>
             }
 
             updateEditor();
+
+            window.addEventListener("ghosty:langchange", function () {
+                updateEditor();
+                filterVariables();
+            });
         })();
 
         (function () {
@@ -603,15 +656,18 @@ We hope you enjoy your stay!</textarea>
             var headings = document.querySelectorAll("main h2[id]");
             if (!headings.length) return;
 
-            var html = "";
-            for (var i = 0; i < headings.length; i++) {
-                var h = headings[i];
-                var text = h.textContent.replace(/^#\s*/, "").trim();
-                html += '<li><a class="toc-link" href="#' + h.id + '">' + text + '</a></li>';
+            function build() {
+                var html = "";
+                for (var i = 0; i < headings.length; i++) {
+                    var h = headings[i];
+                    var text = h.textContent.replace(/^#\s*/, "").trim();
+                    html += '<li><a class="toc-link" href="#' + h.id + '">' + text + '</a></li>';
+                }
+                list.innerHTML = html;
+                bind();
             }
-            list.innerHTML = html;
 
-            var links = list.querySelectorAll(".toc-link");
+            var links = [];
             var current = null;
             var pinnedLink = null;
 
@@ -625,26 +681,17 @@ We hope you enjoy your stay!</textarea>
 
             function updateActive() {
                 if (pinnedLink) return;
-
                 var offset = 60;
                 var scrollY = window.scrollY || window.pageYOffset;
                 var docHeight = document.documentElement.scrollHeight;
                 var winHeight = window.innerHeight;
                 var atBottom = scrollY + winHeight >= docHeight - 4;
-
-                if (atBottom) {
-                    setActive(links[links.length - 1]);
-                    return;
-                }
-
+                if (atBottom) { setActive(links[links.length - 1]); return; }
                 var activeIndex = 0;
                 for (var i = 0; i < headings.length; i++) {
                     var top = headings[i].getBoundingClientRect().top;
-                    if (top - offset <= 0) {
-                        activeIndex = i;
-                    } else {
-                        break;
-                    }
+                    if (top - offset <= 0) activeIndex = i;
+                    else break;
                 }
                 setActive(links[activeIndex]);
             }
@@ -653,17 +700,17 @@ We hope you enjoy your stay!</textarea>
             function onScroll() {
                 if (ticking) return;
                 ticking = true;
-                requestAnimationFrame(function () {
-                    updateActive();
-                    ticking = false;
-                });
+                requestAnimationFrame(function () { updateActive(); ticking = false; });
             }
 
-            for (var i = 0; i < links.length; i++) {
-                links[i].addEventListener("click", function () {
-                    pinnedLink = this;
-                    setActive(this);
-                });
+            function bind() {
+                links = list.querySelectorAll(".toc-link");
+                for (var i = 0; i < links.length; i++) {
+                    links[i].addEventListener("click", function () {
+                        pinnedLink = this;
+                        setActive(this);
+                    });
+                }
             }
 
             function unpin() {
@@ -681,7 +728,33 @@ We hope you enjoy your stay!</textarea>
 
             window.addEventListener("scroll", onScroll, { passive: true });
             window.addEventListener("resize", onScroll);
+
+            build();
             updateActive();
+
+            window.addEventListener("ghosty:langchange", function () {
+                pinnedLink = null;
+                current = null;
+                build();
+                updateActive();
+            });
+        })();
+
+        (function () {
+            "use strict";
+            var btn = document.getElementById("theme-toggle");
+            if (!btn) return;
+            function apply(isLight) {
+                if (isLight) document.documentElement.setAttribute("data-theme", "light");
+                else document.documentElement.removeAttribute("data-theme");
+                try { localStorage.setItem("ghosty:theme", isLight ? "light" : "dark"); } catch (e) {}
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute("content", isLight ? "#ffffff" : "#313338");
+            }
+            btn.addEventListener("click", function () {
+                var isLight = document.documentElement.getAttribute("data-theme") === "light";
+                apply(!isLight);
+            });
         })();
     </script>
 </body>
